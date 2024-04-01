@@ -3,9 +3,9 @@ import React from "react";
 import { useBooks } from "../../hooks/books";
 import BookItem from "../molecules/BookItem";
 import Brands from "../molecules/Brands";
-import dynamic from "next/dynamic";
 import { Toast, ToastProvider } from "@motiolibs/motio-js";
 import AuthProvider from "../../providers/AuthProvider";
+import Skeleton from "react-loading-skeleton";
 
 const LIMIT = 10;
 const Books = () => {
@@ -20,11 +20,17 @@ const Books = () => {
                                 <BookItem key={index} book={book} />
                             ))}
                     </div>
-                    {isLoading && <div>loading....</div>}
+                    {isLoading && (
+                        <div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 gap-6">
+                            <Skeleton className="w-full h-[300px]" />
+                            <Skeleton className="w-full h-[300px]" />
+                            <Skeleton className="w-full h-[300px]" />
+                        </div>
+                    )}
+                    <Brands />
                     <div>
                         <div ref={observerTarget}></div>
                     </div>
-                    <Brands />
                 </div>
                 <Toast />
             </ToastProvider>
