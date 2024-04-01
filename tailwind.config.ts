@@ -1,20 +1,76 @@
-import type { Config } from "tailwindcss";
-
-const config: Config = {
-  content: [
-    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
-  ],
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: ["./src/**/*.{js,ts,jsx,tsx,mdx}"],
   theme: {
     extend: {
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
-      },
+      colors: {
+        "neutral-50": "#e9e9e9",
+        "neutral-100": "#bcbcbc",
+        "neutral-200": "#9b9b9b",
+        "neutral-300": "#6e6e6e",
+        "neutral-400": "#515151",
+        "neutral-500": "#262626",
+        "neutral-600": "#232323",
+        "neutral-700": "#1b1b1b",
+        "neutral-800": "#151515",
+        "neutral-900": "#0f0f0f",
+        // primary
+        "galaxy-purple-50": "#f5eefd",
+        "galaxy-purple-100": "#dfcbf9",
+        "galaxy-purple-200": "#d0b2f6",
+        "galaxy-purple-300": "#bb8ef2",
+        "galaxy-purple-400": "#ad79f0",
+        "galaxy-purple-500": "#9d63ed",
+        "galaxy-purple-600": "#8b4fd7",
+        "galaxy-purple-700": "#6d3ea8",
+        "galaxy-purple-800": "#543082",
+        "galaxy-purple-900": "#402563",
+        // warning
+        "warning-50": "#fff5e6",
+        "warning-100": "#ffdfb0",
+        "warning-200": "#ffd08a",
+        "warning-300": "#ffbb54",
+        "warning-400": "#ffad33",
+        "warning-500": "#ff9900",
+        "warning-600": "#e88b00",
+        "warning-700": "#b56d00",
+        "warning-800": "#8c5400",
+        "warning-900": "#6b4000",
+        // successed
+        "successed-50": "#e6fce6",
+        "successed-100": "#b0f4b3",
+        "successed-200": "#8aef8e",
+        "successed-300": "#54e85a",
+        "successed-400": "#33e33a",
+        "successed-500": "#00dc09",
+        "successed-600": "#00c808",
+        "successed-700": "#009c06",
+        "successed-800": "#007905",
+        "successed-900": "#005c04",
+        // destructive
+        "desctructive-50": "#fee6e6",
+        "desctructive-100": "#fcb1b1",
+        "desctructive-200": "#fa8b8b",
+        "desctructive-300": "#f85555",
+        "desctructive-400": "#f63535",
+        "desctructive-500": "#f40202",
+        "desctructive-600": "#de0202",
+        "desctructive-700": "#ad0101",
+        "desctructive-800": "#860101",
+        "desctructive-900": "#660101",
+        // vale yellow
+        "vale-yellow-50": "#fcfee6",
+        "vale-yellow-100": "#f5fcb0",
+        "vale-yellow-200": "#f0fa8a",
+        "vale-yellow-300": "#eaf855",
+        "vale-yellow-400": "#e5f634",
+        "vale-yellow-500": "#dff401",
+        "vale-yellow-600": "#cbde01",
+        "vale-yellow-700": "#9ead01",
+        "vale-yellow-800": "#7b8601",
+        "vale-yellow-900": "#5e6600"
+      }
     },
   },
   plugins: [],
 };
-export default config;
