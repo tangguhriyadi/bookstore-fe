@@ -1,9 +1,18 @@
-import React from 'react'
+import React from "react";
+import dynamic from "next/dynamic";
+const LoginForm = dynamic(
+    () => import("../../components/organisms/LoginForm"),
+    { ssr: false }
+);
 
-const page = () => {
-  return (
-    <div>page</div>
-  )
-}
+const Login: React.FC = () => {
+    return (
+        <section className="w-full mt-16 flex justify-center items-center flex-col gap-y-8">
+            <h2 className="font-medium">Plase Login To Your Account</h2>
 
-export default page
+            <LoginForm />
+        </section>
+    );
+};
+
+export default Login;

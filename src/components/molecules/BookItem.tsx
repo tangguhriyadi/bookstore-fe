@@ -13,12 +13,17 @@ const BookItem: React.FC<BookItemProps> = (props) => {
     const { cover_image, title, genres } = book;
     return (
         <div className="flex justify-center items-center flex-col border border-neutral-200 p-6 gap-y-2">
-            <div className="flex gap-x-2">
-            {genres.map((genre, index) => (
-                <div key={index} className="bg-vale-yellow-500 px-2 py-1 rounded-md">
-                    <Paragraph type="xsmall" className="font-semibold">{genre}</Paragraph>
-                </div>
-            ))}
+            <div className="flex gap-2">
+                {genres.map((genre, index) => (
+                    <div
+                        key={index}
+                        className="bg-vale-yellow-500 px-2 py-1 rounded-md"
+                    >
+                        <Paragraph type="xsmall" className="font-semibold">
+                            {genre}
+                        </Paragraph>
+                    </div>
+                ))}
             </div>
             <div className="w-[100px] h-[127px] relative">
                 <Image
