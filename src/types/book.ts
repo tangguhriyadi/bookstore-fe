@@ -6,5 +6,5 @@ export type Book = {
     price: string;
     cover_image: string;
     genres: string[];
-    author: Author;
+    auhtor: Author;
 };

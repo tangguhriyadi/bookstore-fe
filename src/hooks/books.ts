@@ -1,13 +1,18 @@
+"use client";
 import { RefObject, useCallback, useEffect, useRef, useState } from "react";
 import { Book } from "../types/book";
 import { AxiosResponse } from "axios";
 import { axios } from "../plugins/axios";
+import { BaseApiResponse } from "../types/common";
 
 interface BookListHook {
     data: Book[];
     isLoading: boolean;
     isError: boolean;
     observerTarget: RefObject<HTMLDivElement>;
+}
+interface BookDetailHook {
+    data?: Book;
 }
 interface useBooksProps {
     limit: number;
@@ -64,3 +69,4 @@ export const useBooks = (props: useBooksProps): BookListHook => {
 
     return { data: items, isError, isLoading, observerTarget };
 };
+
