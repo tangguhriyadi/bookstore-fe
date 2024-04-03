@@ -50,7 +50,7 @@ export const useOrder = (): OrderHook => {
         } catch (error: any) {
             setToast({
                 isOpen: true,
-                message: error.message,
+                message: error.response.data.message,
                 type: "error",
             });
         } finally {
@@ -68,7 +68,7 @@ export const useOrder = (): OrderHook => {
                 message: "Cancel order success",
                 type: "success",
             });
-            router.push('/');
+            router.push("/");
         } catch (err: any) {
             setToast({
                 isOpen: true,
