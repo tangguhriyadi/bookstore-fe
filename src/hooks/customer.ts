@@ -32,6 +32,7 @@ export const useCustomerPoint = (): CustomerPointHook => {
                 }
             } catch {
                 setData(0);
+                localStorage.removeItem("customer_info");
             } finally {
                 setIsLoading(false);
             }
