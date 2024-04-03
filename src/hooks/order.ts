@@ -14,6 +14,7 @@ interface OrderHook {
     ) => Promise<void>;
     isLoading: boolean;
     cancelOrder: (orderId: number) => Promise<void>;
+    cancelLoading: boolean;
 }
 interface OrderListHook {
     data?: Order[];
@@ -22,6 +23,7 @@ interface OrderListHook {
 
 export const useOrder = (): OrderHook => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [cancelLoading, setCancelLoading] = useState<boolean>(false);
     const router = useRouter();
     const { setToast } = useToast();
     const order = async (
@@ -48,7 +50,7 @@ export const useOrder = (): OrderHook => {
         } catch (error: any) {
             setToast({
                 isOpen: true,
-                message: "You have bought the book",
+                message: error.message,
                 type: "error",
             });
         } finally {
@@ -57,6 +59,7 @@ export const useOrder = (): OrderHook => {
     };
 
     const cancelOrder = async (orderId: number) => {
+        setCancelLoading(true);
         try {
             await axios.delete(`/orders/${orderId}`).then((res) => res.data);
 
@@ -65,7 +68,7 @@ export const useOrder = (): OrderHook => {
                 message: "Cancel order success",
                 type: "success",
             });
-            router.refresh()
+            router.push('/');
         } catch (err: any) {
             setToast({
                 isOpen: true,
@@ -73,11 +76,11 @@ export const useOrder = (): OrderHook => {
                 type: "error",
             });
         } finally {
-            setIsLoading(false);
+            setCancelLoading(false);
         }
     };
 
-    return { order, isLoading, cancelOrder };
+    return { order, isLoading, cancelOrder, cancelLoading };
 };
 
 export const useOrderList = (customerId: number): OrderListHook => {
