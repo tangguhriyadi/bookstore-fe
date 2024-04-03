@@ -11,9 +11,6 @@ interface BookListHook {
     isError: boolean;
     observerTarget: RefObject<HTMLDivElement>;
 }
-interface BookDetailHook {
-    data?: Book;
-}
 interface useBooksProps {
     limit: number;
 }

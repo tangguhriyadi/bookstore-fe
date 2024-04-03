@@ -3,7 +3,6 @@ import React from "react";
 import { useBooks } from "../../hooks/books";
 import BookItem from "../molecules/BookItem";
 import Brands from "../molecules/Brands";
-import { Toast, ToastProvider } from "@motiolibs/motio-js";
 import AuthProvider from "../../providers/AuthProvider";
 import Skeleton from "react-loading-skeleton";
 
@@ -12,7 +11,6 @@ const Books = () => {
     const { data, observerTarget, isLoading } = useBooks({ limit: LIMIT });
     return (
         <AuthProvider>
-            <ToastProvider>
                 <div className="py-6 px-6">
                     <div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4">
                         {data &&
@@ -32,8 +30,6 @@ const Books = () => {
                         <div ref={observerTarget}></div>
                     </div>
                 </div>
-                <Toast />
-            </ToastProvider>
         </AuthProvider>
     );
 };

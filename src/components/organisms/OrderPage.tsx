@@ -15,6 +15,7 @@ const OrderPage: React.FC = () => {
     const { cancelOrder } = useOrder();
 
     const { isLoading, data } = useOrderList(customer ? customer.id : 1);
+    
     if (isLoading) return <div>Loading...</div>;
     return (
         <ul>

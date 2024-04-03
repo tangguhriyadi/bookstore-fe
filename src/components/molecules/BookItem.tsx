@@ -2,7 +2,7 @@
 import React, { useEffect, useMemo } from "react";
 import { Book } from "../../types/book";
 import Image from "next/image";
-import { Paragraph } from "@motiolibs/motio-js";
+import { ButtonWithIcon, Paragraph } from "@motiolibs/motio-js";
 import { useOrder } from "../../hooks/order";
 import { Customer } from "../../types/customer";
 
@@ -21,16 +21,20 @@ const BookItem: React.FC<BookItemProps> = (props) => {
         }
     }, []) as Customer;
 
-    const { order } = useOrder();
+    const { order, isLoading } = useOrder();
+    
+    if(isLoading){
+        return <div className="loading"></div>
+    }
     return (
-        <div className="flex justify-center items-center flex-col border border-neutral-200 p-6 gap-y-2">
+        <div className="flex justify-center items-center flex-col border border-neutral-200 px-6 pt-6 pb-2 gap-y-2">
             <div className="flex gap-2">
                 {genres.map((genre, index) => (
                     <div
                         key={index}
                         className="bg-vale-yellow-500 px-2 py-1 rounded-md"
                     >
-                        <Paragraph type="xsmall" className="font-semibold">
+                        <Paragraph type="xsmall" className="font-semibold capitalize">
                             {genre}
                         </Paragraph>
                     </div>
@@ -42,8 +46,6 @@ const BookItem: React.FC<BookItemProps> = (props) => {
                     alt="book"
                     fill
                     priority
-                    className="cursor-pointer"
-                    onClick={() => order(id, 1, customer.id)}
                 />
             </div>
             <div>
@@ -51,16 +53,30 @@ const BookItem: React.FC<BookItemProps> = (props) => {
                     {title}
                 </Paragraph>
             </div>
-            <div>
-                <Paragraph type="small" maxLine={2}>
-                    Author: {auhtor.name}
-                </Paragraph>
-            </div>
-            <div>
-                <Paragraph type="small" maxLine={2}>
-                    ${price}
-                </Paragraph>
-            </div>
+            <table className="table-auto">
+                <tr>
+                    <td>Author</td>
+                    <td className="px-2">:</td>
+                    <td>
+                        <strong>{auhtor.name}</strong>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Price</td>
+                    <td className="px-2">:</td>
+                    <td>
+                        <strong>{price} Point</strong>
+                    </td>
+                </tr>
+            </table>
+
+            <ButtonWithIcon
+                icon="cart"
+                label="Order Now"
+                position="left"
+                onClick={() => order(id, 1, customer.id)}
+                disabled={isLoading}
+            />
         </div>
     );
 };

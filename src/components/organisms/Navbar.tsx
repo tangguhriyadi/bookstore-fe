@@ -1,6 +1,7 @@
 "use client";
 import { useRouter } from "next/navigation";
 import React from "react";
+import Point from "../molecules/Point";
 
 const Navbar = () => {
     const router = useRouter();
@@ -14,11 +15,15 @@ const Navbar = () => {
                     {" "}
                     Bookstore
                 </h1>
-                <div
-                    onClick={() => router.push("/orders")}
-                    className="text-white font-semibold text-xl cursor-pointer"
-                >
-                    My Orders
+                <div className="flex justify-between gap-x-4">
+                    <Point />
+                    <div className="h-[100] w-[3px] bg-white"></div>
+                    <div
+                        onClick={() => router.push("/orders")}
+                        className="text-white font-semibold text-xl cursor-pointer"
+                    >
+                        My Orders
+                    </div>
                 </div>
             </nav>
         </header>

@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Order } from "../types/order";
 import { AxiosResponse } from "axios";
+import { useToast } from "@motiolibs/motio-js";
 
 interface OrderHook {
     order: (
@@ -22,6 +23,7 @@ interface OrderListHook {
 export const useOrder = (): OrderHook => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const router = useRouter();
+    const { setToast } = useToast();
     const order = async (
         bookId: number,
         quantity: number,
@@ -37,10 +39,18 @@ export const useOrder = (): OrderHook => {
                 })
                 .then((res) => res.data);
 
-            alert("order success");
+            setToast({
+                isOpen: true,
+                message: "order success",
+                type: "success",
+            });
             router.push("/orders");
         } catch (error: any) {
-            alert(error.message);
+            setToast({
+                isOpen: true,
+                message: "You have bought the book",
+                type: "error",
+            });
         } finally {
             setIsLoading(false);
         }
@@ -50,10 +60,18 @@ export const useOrder = (): OrderHook => {
         try {
             await axios.delete(`/orders/${orderId}`).then((res) => res.data);
 
-            alert("cancel success");
-            router.push("/orders");
+            setToast({
+                isOpen: true,
+                message: "Cancel order success",
+                type: "success",
+            });
+            router.refresh()
         } catch (err: any) {
-            alert(err.message);
+            setToast({
+                isOpen: true,
+                message: err.message,
+                type: "error",
+            });
         } finally {
             setIsLoading(false);
         }
@@ -65,6 +83,7 @@ export const useOrder = (): OrderHook => {
 export const useOrderList = (customerId: number): OrderListHook => {
     const [items, setItems] = useState<Order[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(false);
+    const { setToast } = useToast();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -76,13 +95,17 @@ export const useOrderList = (customerId: number): OrderListHook => {
 
                 setItems(data.data);
             } catch (err) {
-                alert(err);
+                setToast({
+                    isOpen: true,
+                    message: "You have not bought any book",
+                    type: "error",
+                });
             } finally {
                 setIsLoading(false);
             }
         };
         fetchData();
-    }, [customerId]);
+    }, [customerId, setToast]);
 
     return { data: items, isLoading };
 };
